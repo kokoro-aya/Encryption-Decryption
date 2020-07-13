@@ -1,12 +1,18 @@
 package encryptdecrypt;
 
+import java.util.Scanner;
+
 public class Main {
 
-    static String convert(String src) {
+    static String convert(String src, int key) {
         String dst = "";
         for (char c: src.toCharArray()) {
             if (Character.isAlphabetic(c)) {
-                dst += (char)('a' + ('z' - c));
+                if (c + key <= 'z') {
+                    dst += (char) (c + key);
+                } else {
+                    dst += (char) ('a' + c + key - 'z' - 1);
+                }
             }
             else {
                 dst += c;
@@ -16,7 +22,9 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        String src = "we found a treasure!";
-        System.out.println(convert(src));
+        Scanner sc = new Scanner(System.in);
+        String src = sc.nextLine();
+        int key = sc.nextInt();
+        System.out.println(convert(src, key));
     }
 }
