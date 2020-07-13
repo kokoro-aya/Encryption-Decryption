@@ -38,14 +38,34 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        String method = sc.nextLine();
-        String src = sc.nextLine();
-        int key = sc.nextInt();
-        if (method.equals("enc")) {
+//        Scanner sc = new Scanner(System.in);
+//        String method = sc.nextLine();
+//        String src = sc.nextLine();
+//        int key = sc.nextInt();
+        String mode = null;
+        String src = null;
+        Integer key = null;
+        for (int i = 0; i < args.length; i++) {
+            if (args[i].equals("-mode")) {
+                mode = args[i + 1];
+            }
+            if (args[i].equals("-key")) {
+                key = Integer.parseInt(args[i + 1]);
+            }
+            if (args[i].equals("-data")) {
+                src = args[i + 1];
+            }
+        }
+        if (mode == null)
+            mode = "enc";
+        if (key == null)
+            key = 0;
+        if (src == null)
+            src = "";
+        if (mode.equals("enc")) {
             System.out.println(encode(src, key));
         }
-        if (method.equals("dec")) {
+        if (mode.equals("dec")) {
             System.out.println(decode(src, key));
         }
     }
